@@ -95,6 +95,7 @@ client.on('message', async msg => {
       const embed = new Discord.RichEmbed()
         .setTitle(doc.pubgName)
         .setColor('#6890cc')
+        .addField('RankPoints', stats.rankPoints)
         .addField('K/D', stats['k/d'], true)
         .addField('Wins', stats.wins, true)
         .addField('Top10s', stats.top10s, true)
