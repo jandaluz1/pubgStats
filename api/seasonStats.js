@@ -4,7 +4,9 @@ const { season } = require('../config.json');
 const fetchSeasonStats = async playerId => {
   try {
     console.log('API CALL TO FETCH STATS');
-    const res = await pubg.get(`players/${playerId}/seasons/${season}`);
+    const res = await pubg.get(
+      `players/${playerId}/seasons/${process.env.SEASON || season}`
+    );
     const stats = res.data.data.attributes.gameModeStats['squad-fpp'];
     return {
       id: playerId,

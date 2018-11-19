@@ -105,4 +105,4 @@ client.on('message', async msg => {
   }
 });
 
-client.login(token);
+client.login(process.env.TOKEN || token);
