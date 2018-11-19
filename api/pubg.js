@@ -1,10 +1,9 @@
 const axios = require('axios');
-const { pubgToken } = require('../config.json');
-
+require('../keys');
 const pubg = axios.create({
   baseURL: 'https://api.pubg.com/shards/steam',
   headers: {
-    Authorization: `Bearer ${process.env.PUBGTOKEN || pubgToken}`,
+    Authorization: `Bearer ${process.env.PUBGTOKEN}`,
     Accept: 'application/json'
   },
   timeout: 3000

@@ -1,10 +1,11 @@
 const Discord = require('discord.js');
 const mongoose = require('mongoose');
-const Memcached = require('memcached');
-const { token } = require('./config.json');
 const fetchUserId = require('./api/accountId');
 const fetchSeasonStats = require('./api/seasonStats');
 const User = require('./models/user');
+
+//Secrets
+require('./keys');
 
 //db connection
 mongoose.connect(
@@ -105,4 +106,4 @@ client.on('message', async msg => {
   }
 });
 
-client.login(process.env.TOKEN || token);
+client.login(process.env.TOKEN);
