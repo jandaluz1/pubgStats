@@ -1,13 +1,11 @@
 const Discord = require('discord.js');
-const mongoose = require('mongoose');
 const fetchUserId = require('./api/accountId');
 const fetchSeasonStats = require('./api/seasonStats');
-const User = require('./models/user');
 const statsMessage = require('./messages/statsMessage');
 const errorMessage = require('./messages/errorMessage');
 
-//Secrets
-require('./keys');
+// //Secrets
+// require('./keys');
 
 // bot init
 const client = new Discord.Client();

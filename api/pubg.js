@@ -1,5 +1,5 @@
 const axios = require('axios');
-require('../keys');
+// require('../keys');
 const pubg = axios.create({
   baseURL: 'https://api.pubg.com/shards/steam',
   headers: {
