@@ -37,7 +37,6 @@ client.on('message', async msg => {
 
   if (args[0].startsWith(prefix + 'stats')) {
     const modes = ['solo', 'duo', 'squad', 'solo-fpp', 'duo-fpp', 'squad-fpp'];
-    console.log(mode);
     try {
       try {
         if (!mode || !modes.includes(mode.toLowerCase())) {
