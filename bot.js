@@ -19,6 +19,8 @@ client.on('message', async msg => {
   //turns message into an array of words
 
   const args = msg.content.split(' ');
+  const mode = args[1];
+
   // statsbot channel
   const statsChannel = msg.guild.channels.find('name', 'statsbot');
   const name = msg.member.nickname || msg.author.username;
@@ -34,17 +36,30 @@ client.on('message', async msg => {
   }
 
   if (args[0].startsWith(prefix + 'stats')) {
+    const modes = ['solo', 'duo', 'squad', 'solo-fpp', 'duo-fpp', 'squad-fpp'];
+    console.log(mode);
     try {
-      const id = await fetchUserId(name);
-      const stats = await fetchSeasonStats(id);
-
-      // creates message to send to the channel
-      const embed = statsMessage(name, stats);
-      // sends message to the channel
-      statsChannel.send({ embed });
-    } catch (err) {
-      const embed = errorMessage();
-      statsChannel.send({ embed });
+      try {
+        if (!mode || !modes.includes(mode.toLowerCase())) {
+          throw new Error(
+            "Please specify mode: 'solo', 'duo', 'squad', 'solo-fpp', 'duo-fpp', 'squad-fpp'"
+          );
+        }
+      } catch (error) {
+        //throwing error for no mode included in bot command
+        throw error;
+      }
+      try {
+        const id = await fetchUserId(name);
+        const stats = await fetchSeasonStats(id, mode);
+        statsChannel.send(statsMessage(name, stats));
+      } catch (error) {
+        throw new Error(
+          'Could not find your PUBG account. Try chaning your nickname to match your PUBG in-game name.'
+        );
+      }
+    } catch (error) {
+      statsChannel.send(errorMessage(error.message));
     }
   }
 });
